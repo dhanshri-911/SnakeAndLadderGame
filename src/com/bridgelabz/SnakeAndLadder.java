@@ -11,11 +11,13 @@ public class SnakeAndLadder {
     public static void main(String[] args)
     {
         int playerPosition=0;
+        int dicePlayed=0;
 
         System.out.println("Starting Position is "+START_POSITION);
 
-        while(playerPosition <= WIN)
+        while(playerPosition < WIN)
         {
+            dicePlayed++;
             int rollDice = (int) (Math.floor(Math.random() * 10) % 6) + 1;
             System.out.println("After Rolling Dice We Get " + rollDice);
             int playerCheckOption = (int) (Math.random() * 3) + 1;
@@ -27,17 +29,10 @@ public class SnakeAndLadder {
                     break;
 
                 case LADDER:
-                    playerPosition = playerPosition + rollDice;
-                    System.out.println("Congratulations !! You Got the ladder your position will be increased by " + rollDice);
-                    if(playerPosition >= WIN)
+                    if((playerPosition + rollDice) <= WIN)
                     {
-                        playerPosition = playerPosition - rollDice;
-                    }
-                    else if (playerPosition == WIN)
-                    {
-                        System.out.println("Player won");
-                        System.out.println("Position  "+playerPosition);
-                        System.exit(0);
+                        playerPosition = playerPosition + rollDice;
+                        System.out.println("Congratulations !! You Got the ladder your position will be increesed by "+rollDice);
                     }
                     break;
 
@@ -56,8 +51,8 @@ public class SnakeAndLadder {
                 default:
                     System.out.println("Something went wrong!!");
             }
-            playerPosition++;
-            System.out.println("Position :: "+playerPosition);
+            System.out.println("Position  "+playerPosition);
         }
+        System.out.println("We just make "+dicePlayed+" Number of dice to win the game");
     }
 }
